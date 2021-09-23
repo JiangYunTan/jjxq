@@ -28,7 +28,7 @@
           <span>{{ relativeTime(obj.pubdate) }}</span>
         </div>
         <!-- 反馈按钮 -->
-        <van-icon name="cross" @click="show = true" />
+        <van-icon name="cross" @click.stop="show = true" v-if="showX" />
         <van-action-sheet v-model="show" :actions="actions" @select="onSelect" :cancel-text="cancelText" close-on-click-action get-container="body" @cancel="onCancel" />
         <!-- 其他问题面板 -->
         <van-dialog v-model="Jshow" title="反馈" show-cancel-button get-container="body" :before-close="confirmFN">
@@ -51,6 +51,10 @@ export default {
       default () {
         return {}
       }
+    },
+    showX: {
+      type: Boolean,
+      default: true // 默认显示
     },
     i: Number
   },

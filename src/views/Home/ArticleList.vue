@@ -1,6 +1,6 @@
 <template>
   <div class="article-list__container">
-      <ArticleItem v-for="(item, index) in articleList" :key="item.art_id" :obj="item" :articleList="articleList" :i="index" @delunlike="delunlikefn"></ArticleItem>
+      <ArticleItem v-for="(item, index) in articleList" :key="item.art_id" :obj="item" :articleList="articleList" :i="index" @delunlike="delunlikefn"  @click.native="$router.push(`/article_detail?aid=${item.art_id}`)"></ArticleItem>
   </div>
 </template>
 

@@ -128,3 +128,30 @@ export const updateChannelAPI = ({ channels }) => {
     }
   })
 }
+// 搜索联想菜单
+export const suggestListAPI = ({ q }) => {
+  return request({
+    url: '/v1_0/suggestion',
+    params: {
+      q: q
+    }
+  })
+}
+// 搜索 - 结果列表
+export const searchResultListAPI = ({ q, page = 1 }) => {
+  return request({
+    url: '/v1_0/search',
+    params: {
+      q,
+      page
+    }
+  })
+}
+// 文章 - 详情
+export const articleDetailAPI = ({ id }) => {
+  return request({
+    // :id是后台规定的参数名
+    // 前端要在对应路径位置传值(不要写:)
+    url: `/v1_0/articles/${id}`
+  })
+}

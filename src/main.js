@@ -21,7 +21,8 @@ import { timeAgo } from '@/utils/date'
 // 轻提示 Toast
 // ActionSheet 动作面板
 // 弹出层 Popup home 下的index引用
-import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, Toast, ActionSheet, Dialog, Popup, Row, Col, Badge } from 'vant'
+// 注册分割线组件, Divider 在main.js
+import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, Toast, ActionSheet, Dialog, Popup, Row, Col, Badge, Search, Divider } from 'vant'
 Vue.prototype.$timeAgo = timeAgo
 Vue.use(NavBar)
 Vue.use(Form)
@@ -42,6 +43,8 @@ Vue.use(Popup)
 Vue.use(Badge)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Search)
+Vue.use(Divider)
 
 Vue.config.productionTip = false
 

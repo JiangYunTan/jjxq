@@ -7,7 +7,9 @@ import Layout from '@/views/Layout'
 // 首页下的二级路由
 import Home from '@/views/Home'
 import User from '@/views/User'
-
+import Search from '@/views/Search'
+import SearchResult from '@/views/Search/SearchResult'
+import ArticleDetail from '@/views/ArticleDetail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,6 +21,18 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/search',
+    component: Search
+  },
+  {
+    path: '/search/:keywords',
+    component: SearchResult
+  },
+  {
+    path: '/article_detail',
+    component: ArticleDetail
   },
   {
     path: '/layout',
