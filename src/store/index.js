@@ -6,11 +6,11 @@ import userModule from './modules/user.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // namespaced: true,
   strict: true,
   state: {
   },
   mutations: {
+
   },
   actions: {
   },

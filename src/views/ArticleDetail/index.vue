@@ -15,8 +15,8 @@
         </template>
         <template #default>
           <div>
-            <van-button type="info" size="mini" v-if="artObj.is_followed">已关注</van-button>
-            <van-button icon="plus" type="info" size="mini" plain   v-else>关注</van-button>
+            <van-button type="info" size="mini" v-if="artObj.is_followed" @click="followedFn(false)">已关注</van-button>
+            <van-button icon="plus" type="info" size="mini" plain v-else  @click="followedFn(true)">关注</van-button>
           </div>
         </template>
       </van-cell>
@@ -32,23 +32,70 @@
 
       <!-- 点赞 -->
       <div class="like-box">
-        <van-button icon="good-job" type="danger" size="small" v-if="artObj.attribute === 1">已点赞</van-button>
-        <van-button icon="good-job-o" type="danger" plain size="small" v-else>点赞</van-button>
+        <van-button icon="good-job" type="danger" size="small" v-if="artObj.attitude === 1" @click="loveFn(false)">已点赞</van-button>
+        <van-button icon="good-job-o" type="danger" plain size="small" v-else @click="loveFn(true)">点赞</van-button>
       </div>
     </div>
+    <!-- 文章评论区域 -->
+    <CommentList></CommentList>
   </div>
 </template>
 
 <script>
-import { articleDetailAPI } from '@/api'
+import CommentList from './CommentList.vue'
+import { articleDetailAPI, followedUserAPI, unFollowedUserAPI, articleLikeAPI, articleDisLikeAPI } from '@/api'
 export default {
+  components: {
+    CommentList
+  },
   data () {
     return {
       artObj: {} // 文章对象
     }
   },
+  methods: {
+    // 作者关注/取关
+    async followedFn (bool) {
+      if (bool === true) {
+        // 用户点了关注按钮
+        // 业务: 关注用户
+        // 显示: 已关注按钮
+        this.artObj.is_followed = true
+        await followedUserAPI({
+          target: this.artObj.aut_id
+        })
+      } else {
+        // 用户点了已关注按钮身上
+        // 业务: 取消关注用户
+        // 显示: 关注按钮
+        this.artObj.is_followed = false
+        await unFollowedUserAPI({
+          uid: this.artObj.aut_id
+        })
+      }
+    },
+    // 文章点赞/取消点赞
+    async loveFn (bool) {
+      if (bool === true) { // 用户点在了点赞按钮上
+        // 业务 => 点赞文章
+        // 显示 => 已点赞按钮
+        // console.log(this.artObj.attitude);
+        this.artObj.attitude = 1
+        await articleLikeAPI({
+          target: this.$route.query.aid
+        })
+      } else { // 用户点在了已点赞按钮上
+        // 业务 => 取消点赞文章
+        // 显示 => 点赞按钮
+        this.artObj.attitude = -1
+        await articleDisLikeAPI({
+          artId: this.$route.query.aid
+        })
+      }
+    }
+  },
   async created () {
-    console.log(this.$route)
+    // console.log(this.$route)
     const res = await articleDetailAPI({ id: this.$route.query.aid })
     //  console.log(res)
     //  console.log(res)

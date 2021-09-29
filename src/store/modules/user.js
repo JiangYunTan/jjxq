@@ -5,6 +5,7 @@ const userModule = {
     return {
       token: window.localStorage.getItem('token'),
       refreshToken: window.localStorage.getItem('refreshToken')
+      // user: JSON.parse(localStorage.getItem('user')) || {} // 用户基本资料(默认从本地取)
     }
   },
   mutations: {
@@ -16,6 +17,10 @@ const userModule = {
       state.refreshToken = refreshTokenStr
       localStorage.setItem('refreshToken', refreshTokenStr)
     }
+    // setUser (state, userObj) {
+    //   state.user = userObj
+    //   localStorage.setItem('user', JSON.stringify(userObj))
+    // }
   }
 }
 // 导出
